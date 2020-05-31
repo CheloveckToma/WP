@@ -148,6 +148,7 @@ public class MainMenu {
                     case BIRTH_CERTIFICATE:
                         break;
                     case SUBJECT:
+                        Windows.openAddSubjectWindow(displayTable);
                         break;
                 }
             } catch (IOException b) {
@@ -175,6 +176,9 @@ public class MainMenu {
                         Windows.openDelPerformanceWindow(displayTable);
                         break;
                     case BIRTH_CERTIFICATE:
+                        break;
+                    case SUBJECT:
+                        Windows.openDelSubjectWindow(displayTable);
                         break;
                 }
 
@@ -205,6 +209,9 @@ public class MainMenu {
                         break;
                     case BIRTH_CERTIFICATE:
                         Windows.openEditBirthCertWindow(displayTable);
+                        break;
+                    case SUBJECT:E:
+                        Windows.openEditSubjectWindow(displayTable);
                         break;
                 }
 

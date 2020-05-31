@@ -267,13 +267,13 @@ public class Table {
         TableColumn<Parent, Integer> numberParent = new TableColumn<>("ID");
         numberParent.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        TableColumn<Parent, String> fullNameStudent = new TableColumn<>("teacher");
+        TableColumn<Parent, String> fullNameStudent = new TableColumn<>("student");
         fullNameStudent.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getStudent().getStudentFullName()
         ));
 
         TableColumn<Parent, String> fullName = new TableColumn<>("parent");
-        fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        fullName.setCellValueFactory(new PropertyValueFactory<>("parentFullName"));
 
         TableColumn<Parent, String> familyStatus = new TableColumn<>("status");
         familyStatus.setCellValueFactory(new PropertyValueFactory<>("familyStatus"));

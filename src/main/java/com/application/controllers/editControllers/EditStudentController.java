@@ -98,6 +98,7 @@ public class EditStudentController {
 
             student.setStudentFullName(name.getText());
             student.setBirthDate(date);
+            student.setBirthDate(date);
             student.setPhoneNumber(Long.parseLong(phoneNumber.getText()));
 
 

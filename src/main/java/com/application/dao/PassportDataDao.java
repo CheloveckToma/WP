@@ -1,6 +1,7 @@
 package com.application.dao;
 
 import com.application.entities.PassportData;
+import com.application.entities.Subject;
 import com.application.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,7 +13,7 @@ public class PassportDataDao {
     private Session session = HibernateUtil.getSession();
 
     public PassportData findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(PassportData.class, id);
+        return session.get(PassportData.class, id);
     }
 
     public List<PassportData> findAll() {
@@ -40,5 +41,9 @@ public class PassportDataDao {
         session.delete(passportData);
         tr.commit();
         session.close();
+    }
+    public void closeSession() {
+        if (session.isOpen())
+            session.close();
     }
 }

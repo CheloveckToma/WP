@@ -29,6 +29,7 @@ public class DelPerformanceController {
             Performance performance = performanceDao.findById(Integer.parseInt(id.getText()));
             performanceDao.delete(performance);
             table.showPerformanceTable();
+            id.clear();
         });
 
 

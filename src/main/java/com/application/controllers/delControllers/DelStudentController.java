@@ -27,6 +27,7 @@ public class DelStudentController {
             Student student = studentDao.findById(Integer.parseInt(id.getText()));
             studentDao.delete(student);
             table.showStudentTable();
+            id.clear();
         });
 
 

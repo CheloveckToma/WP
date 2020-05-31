@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="8.0" layoutY="103.0" prefHeight="23.0" prefWidth="300.0" style="-fx-padding: 0 0 0 10;" />
       <VBox alignment="TOP_CENTER" layoutX="308.0" layoutY="103.0" prefHeight="30.0" prefWidth="300.0" />
@@ -16,7 +16,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <VBox alignment="TOP_CENTER" layoutX="308.0" layoutY="91.0" prefHeight="210.0" prefWidth="300.0">
+      <VBox alignment="TOP_CENTER" layoutX="308.0" layoutY="91.0" prefHeight="240.0" prefWidth="300.0">
          <children>
             <TextField fx:id="name" prefHeight="30.0" prefWidth="300.0" />
             <TextField fx:id="issuedDate" prefHeight="30.0" prefWidth="300.0" />

@@ -7,6 +7,7 @@ import com.application.entities.Address;
 import com.application.entities.BirthCertificate;
 import com.application.entities.PassportData;
 import com.application.entities.Student;
+import com.application.tables.Table;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -51,6 +52,8 @@ public class EditPassportDataController {
 
     @FXML
     private TextField passportId;
+
+    private Table table;
 
     @FXML
     void initialize() {
@@ -98,8 +101,14 @@ public class EditPassportDataController {
             placeResidence.clear();
             snilsNumber.clear();
             tinNumber.clear();
+
+            table.showPassportDataTable();
         });
 
 
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
     }
 }

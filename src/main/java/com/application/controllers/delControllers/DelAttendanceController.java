@@ -34,6 +34,7 @@ public class DelAttendanceController {
             Attendance attendance = attendanceDao.findById(Integer.parseInt(id.getText()));
             attendanceDao.delete(attendance);
             table.showAttendanceTable();
+            id.clear();
         });
 
 

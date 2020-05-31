@@ -1,6 +1,7 @@
 package com.application.dao;
 
 import com.application.entities.Attendance;
+import com.application.entities.Subject;
 import com.application.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,7 +13,7 @@ public class AttendanceDao {
     private Session session = HibernateUtil.getSession();
 
     public Attendance findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(Attendance.class, id);
+        return session.get(Attendance.class, id);
     }
     public List<Attendance> findAll() {
         return (List<Attendance>) HibernateUtil.getSessionFactory().openSession().createQuery("FROM Attendance").list();
@@ -37,5 +38,9 @@ public class AttendanceDao {
         session.delete(attendance);
         tr.commit();
         session.close();
+    }
+    public void closeSession() {
+        if (session.isOpen())
+            session.close();
     }
 }

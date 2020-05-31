@@ -1,6 +1,7 @@
 package com.application.dao;
 
 import com.application.entities.Performance;
+import com.application.entities.Subject;
 import com.application.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,7 +12,7 @@ public class PerformanceDao {
     private Session session = HibernateUtil.getSession();
 
     public Performance findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(Performance.class, id);
+        return session.get(Performance.class, id);
     }
 
     public List<Performance> findAll() {
@@ -37,5 +38,9 @@ public class PerformanceDao {
         session.delete(performance);
         tr.commit();
         session.close();
+    }
+    public void closeSession() {
+        if (session.isOpen())
+            session.close();
     }
 }

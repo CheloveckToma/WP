@@ -40,4 +40,8 @@ public class StudentDao {
         tr.commit();
         session.close();
     }
+    public void closeSession() {
+        if (session.isOpen())
+            session.close();
+    }
 }

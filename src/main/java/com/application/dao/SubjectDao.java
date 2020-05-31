@@ -1,5 +1,6 @@
 package com.application.dao;
 
+import com.application.entities.Attendance;
 import com.application.entities.Subject;
 import com.application.main.HibernateUtil;
 import org.hibernate.Session;
@@ -12,7 +13,7 @@ public class SubjectDao {
     private Session session = HibernateUtil.getSession();
 
     public Subject findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(Subject.class, id);
+        return session.get(Subject.class, id);
     }
 
 
@@ -42,5 +43,10 @@ public class SubjectDao {
         session.delete(discipline);
         tr.commit();
         session.close();
+    }
+
+    public void closeSession() {
+        if (session.isOpen())
+            session.close();
     }
 }

@@ -1,16 +1,16 @@
 package com.application.controllers.delControllers;
 
 
-import com.application.dao.ParentDao;
-import com.application.dao.StudentDao;
-import com.application.entities.Parent;
-import com.application.entities.Student;
+import com.application.dao.AttendanceDao;
+import com.application.dao.SubjectDao;
+import com.application.entities.Attendance;
+import com.application.entities.Subject;
 import com.application.tables.Table;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class DelParentController {
+public class DelSubjectController {
 
     @FXML
     private TextField id;
@@ -18,16 +18,17 @@ public class DelParentController {
     @FXML
     private Button delButton;
 
+
     private Table table;
 
     @FXML
     void initialize() {
 
         delButton.setOnAction(addEvent -> {
-            ParentDao parentDao = new ParentDao();
-            Parent parent = parentDao.findById(Integer.parseInt(id.getText()));
-            parentDao.delete(parent);
-            table.showParentsTable();
+            SubjectDao subjectDao = new SubjectDao();
+            Subject subject = subjectDao.findById(Integer.parseInt(id.getText()));
+            subjectDao.delete(subject);
+            table.showSubjectTable();
             id.clear();
         });
 

@@ -1,6 +1,7 @@
 package com.application.dao;
 
 import com.application.entities.Parent;
+import com.application.entities.Subject;
 import com.application.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,7 +13,7 @@ public class ParentDao  {
     private Session session = HibernateUtil.getSession();
 
     public Parent findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(Parent.class, id);
+        return session.get(Parent.class, id);
     }
 
 
@@ -41,5 +42,10 @@ public class ParentDao  {
         session.delete(parent);
         tr.commit();
         session.close();
+    }
+
+    public void closeSession() {
+        if (session.isOpen())
+            session.close();
     }
 }

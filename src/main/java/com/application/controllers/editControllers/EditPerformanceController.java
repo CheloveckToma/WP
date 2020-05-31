@@ -34,9 +34,10 @@ public class EditPerformanceController {
     void initialize() {
 
         editButton.setOnAction(addEvent -> {
-
             PerformanceDao performanceDao = new PerformanceDao();
-            Performance performance =performanceDao.findById(Integer.parseInt(perfId.getText()));
+
+            Performance performance = performanceDao.findById(Integer.parseInt(perfId.getText()));
+
             performance.setMark(Integer.parseInt(mark.getText()));
 
             SubjectDao subjectDao = new SubjectDao();
@@ -44,6 +45,8 @@ public class EditPerformanceController {
             Subject subject = subjectDao.findById(Integer.parseInt(subjectId.getText()));
 
             performance.setSubject(subject);
+
+            subjectDao.closeSession();
 
             performanceDao.update(performance);
 
