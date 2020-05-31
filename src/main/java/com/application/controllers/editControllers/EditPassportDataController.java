@@ -2,19 +2,16 @@ package com.application.controllers.editControllers;
 
 
 import com.application.dao.PassportDataDao;
-import com.application.dao.StudentDao;
-import com.application.entities.Address;
-import com.application.entities.BirthCertificate;
+import com.application.date.Date;
 import com.application.entities.PassportData;
-import com.application.entities.Student;
-import com.application.tables.Table;
+import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+/**
+ * Контроллер для окна редактирования записей паспортных данных
+ */
 
 public class EditPassportDataController {
     @FXML
@@ -53,32 +50,16 @@ public class EditPassportDataController {
     @FXML
     private TextField passportId;
 
-    private Table table;
+    private DisplayTable displayTable;
 
     @FXML
     void initialize() {
-
         editButton.setOnAction(addEvent -> {
-
             PassportDataDao passportDataDao = new PassportDataDao();
+
             PassportData passportData = passportDataDao.findById(Integer.parseInt(passportId.getText()));
-
-            String[] birthDateArray = birthDate.getText().split("-");
-
-            Calendar calendar = new GregorianCalendar(Integer.parseInt(birthDateArray[0]), Integer.parseInt(birthDateArray[1]), Integer.parseInt(birthDateArray[2]));
-            Date date = new Date();
-            date.setTime(calendar.getTimeInMillis());
-
-            passportData.setBirthDate(date);
-
-            String[] issuedDateArray = issuedDate.getText().split("-");
-
-            calendar = new GregorianCalendar(Integer.parseInt(issuedDateArray[0]), Integer.parseInt(issuedDateArray[1]), Integer.parseInt(issuedDateArray[2]));
-            date = new Date();
-            date.setTime(calendar.getTimeInMillis());
-
-            passportData.setDateIssue(date);
-
+            passportData.setBirthDate(Date.createObjectDate(birthDate.getText()));
+            passportData.setDateIssue(Date.createObjectDate(issuedDate.getText()));
             passportData.setDepartmentCode(Integer.parseInt(depCode.getText()));
             passportData.setIssuedBy(issuedPassportBy.getText());
             passportData.setNumber(Integer.parseInt(passportNumber.getText()));
@@ -90,25 +71,35 @@ public class EditPassportDataController {
 
             passportDataDao.update(passportData);
 
-            name.clear();
-            passportId.clear();
-            birthDate.clear();
-            issuedDate.clear();
-            issuedPassportBy.clear();
-            depCode.clear();
-            passportNumber.clear();
-            passportSeries.clear();
-            placeResidence.clear();
-            snilsNumber.clear();
-            tinNumber.clear();
+            displayTable.showPassportDataTable();
 
-            table.showPassportDataTable();
+            clearFields();
         });
-
-
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    /**
+     * Метод чистит поля ввода
+     */
+
+    private void clearFields() {
+        name.clear();
+        passportId.clear();
+        birthDate.clear();
+        issuedDate.clear();
+        issuedPassportBy.clear();
+        depCode.clear();
+        passportNumber.clear();
+        passportSeries.clear();
+        placeResidence.clear();
+        snilsNumber.clear();
+        tinNumber.clear();
+    }
+
+    /**
+     * @param displayTable - объект отображения таблицы
+     */
+
+    public void setDisplayTable(DisplayTable displayTable) {
+        this.displayTable = displayTable;
     }
 }

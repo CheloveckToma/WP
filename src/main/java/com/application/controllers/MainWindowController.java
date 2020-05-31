@@ -2,10 +2,10 @@ package com.application.controllers;
 
 
 import com.application.main.HibernateUtil;
+import com.application.tables.DisplayTable;
 import com.application.tables.TableСondition;
 
 import com.application.controllers.windows.Windows;
-import com.application.tables.Table;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import com.application.entities.*;
@@ -16,8 +16,11 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
+/**
+ * Контроллер главного окна
+ */
 
-public class MainMenu {
+public class MainWindowController {
 
     @FXML
     private HBox studentsButton;
@@ -38,7 +41,7 @@ public class MainMenu {
     private HBox parentsButton;
 
     @FXML
-    private TableView<Student> table;
+    private TableView<Student> displayTable;
 
     @FXML
     private TableView<Attendance> tableAttendance;
@@ -59,12 +62,12 @@ public class MainMenu {
     private ImageView delButton;
 
     @FXML
-    private ImageView subButton;
+    private ImageView subjectButton;
 
     @FXML
     private ImageView editButton;
     private TableСondition tableСondition;
-    private Table displayTable;
+    private DisplayTable tableDisplay;
 
     @FXML
     void initialize() {
@@ -72,58 +75,50 @@ public class MainMenu {
 
         tableСondition = TableСondition.NOTHING;
 
-        displayTable = new Table(table, tableAttendance, tableParents, tablePerformance, tableSubjects);
-
+        tableDisplay = new DisplayTable(displayTable, tableAttendance, tableParents, tablePerformance, tableSubjects, tableСondition);
 
         EventHandler<MouseEvent> openStudentTableEvent = e -> {
-            tableСondition = TableСondition.STUDENT;
-            displayTable.showStudentTable();
+            tableDisplay.showStudentTable();
             showNoteEditButtons();
-            subButton.setVisible(false);
+            offSubButton();
         };
 
         EventHandler<MouseEvent> openPassportTableEvent = e -> {
-            tableСondition = TableСondition.PASSPORT;
-            displayTable.showPassportDataTable();
+            tableDisplay.showPassportDataTable();
             hideNoteEditButtons();
-            editButton.setVisible(true);
-            subButton.setVisible(false);
+            onEditButton();
+            offSubButton();
 
         };
 
-        EventHandler<MouseEvent> opentPerformanceTableEvent = e -> {
-            tableСondition = TableСondition.PERFORMANCE;
-            displayTable.showPerformanceTable();
+        EventHandler<MouseEvent> openPerformanceTableEvent = e -> {
+            tableDisplay.showPerformanceTable();
             showNoteEditButtons();
-            subButton.setVisible(true);
+            onSubButton();
         };
 
         EventHandler<MouseEvent> openAttendanceTableEvent = e -> {
-            tableСondition = TableСondition.ATTENDANCE;
-            displayTable.showAttendanceTable();
+            tableDisplay.showAttendanceTable();
             showNoteEditButtons();
-            subButton.setVisible(false);
+            offSubButton();
         };
 
         EventHandler<MouseEvent> openBirthCertificateTableEvent = e -> {
-            tableСondition = TableСondition.BIRTH_CERTIFICATE;
-            displayTable.showBirthCertificateTable();
+            tableDisplay.showBirthCertificateTable();
             hideNoteEditButtons();
-            editButton.setVisible(true);
-            subButton.setVisible(false);
+            onEditButton();
+            offSubButton();
         };
 
         EventHandler<MouseEvent> openParentsTableEvent = e -> {
-            tableСondition = TableСondition.PARENTS;
-            displayTable.showParentsTable();
+            tableDisplay.showParentsTable();
             showNoteEditButtons();
-            subButton.setVisible(false);
+            offSubButton();
         };
 
         EventHandler<MouseEvent> openSubjectTableEvent = e -> {
-            tableСondition = TableСondition.SUBJECT;
-            displayTable.showSubjectTable();
-            subButton.setVisible(false);
+            tableDisplay.showSubjectTable();
+            offSubButton();
         };
 
         EventHandler<MouseEvent> addNoteEvent = e -> {
@@ -132,23 +127,23 @@ public class MainMenu {
                     case NOTHING:
                         break;
                     case PARENTS:
-                        Windows.openAddParentWindow(displayTable);
+                        Windows.openAddParentWindow(tableDisplay);
                         break;
                     case STUDENT:
-                        Windows.openAddStudentWindow(displayTable);
+                        Windows.openAddStudentWindow(tableDisplay);
                         break;
                     case PASSPORT:
                         break;
                     case ATTENDANCE:
-                        Windows.openAddAttendanceWindow(displayTable);
+                        Windows.openAddAttendanceWindow(tableDisplay);
                         break;
                     case PERFORMANCE:
-                        Windows.openAddPerformanceWindow(displayTable);
+                        Windows.openAddPerformanceWindow(tableDisplay);
                         break;
                     case BIRTH_CERTIFICATE:
                         break;
                     case SUBJECT:
-                        Windows.openAddSubjectWindow(displayTable);
+                        Windows.openAddSubjectWindow(tableDisplay);
                         break;
                 }
             } catch (IOException b) {
@@ -162,23 +157,23 @@ public class MainMenu {
                     case NOTHING:
                         break;
                     case PARENTS:
-                        Windows.openDelParentWindow(displayTable);
+                        Windows.openDelParentWindow(tableDisplay);
                         break;
                     case STUDENT:
-                        Windows.openDelStudentWindow(displayTable);
+                        Windows.openDelStudentWindow(tableDisplay);
                         break;
                     case PASSPORT:
                         break;
                     case ATTENDANCE:
-                        Windows.openDelAttendanceWindow(displayTable);
+                        Windows.openDelAttendanceWindow(tableDisplay);
                         break;
                     case PERFORMANCE:
-                        Windows.openDelPerformanceWindow(displayTable);
+                        Windows.openDelPerformanceWindow(tableDisplay);
                         break;
                     case BIRTH_CERTIFICATE:
                         break;
                     case SUBJECT:
-                        Windows.openDelSubjectWindow(displayTable);
+                        Windows.openDelSubjectWindow(tableDisplay);
                         break;
                 }
 
@@ -193,25 +188,26 @@ public class MainMenu {
                     case NOTHING:
                         break;
                     case PARENTS:
-                        Windows.openEditParentWindow(displayTable);
+                        Windows.openEditParentWindow(tableDisplay);
                         break;
                     case STUDENT:
-                        Windows.openEditStudentWindow(displayTable);
+                        Windows.openEditStudentWindow(tableDisplay);
                         break;
                     case PASSPORT:
-                        Windows.openEditPassportWindow(displayTable);
+                        Windows.openEditPassportWindow(tableDisplay);
                         break;
                     case ATTENDANCE:
-                        Windows.openEditAttendanceWindow(displayTable);
+                        Windows.openEditAttendanceWindow(tableDisplay);
                         break;
                     case PERFORMANCE:
-                        Windows.openEditPerformanceWindow(displayTable);
+                        Windows.openEditPerformanceWindow(tableDisplay);
                         break;
                     case BIRTH_CERTIFICATE:
-                        Windows.openEditBirthCertWindow(displayTable);
+                        Windows.openEditBirthCertWindow(tableDisplay);
                         break;
-                    case SUBJECT:E:
-                        Windows.openEditSubjectWindow(displayTable);
+                    case SUBJECT:
+                        E:
+                        Windows.openEditSubjectWindow(tableDisplay);
                         break;
                 }
 
@@ -222,7 +218,7 @@ public class MainMenu {
 
         studentsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, openStudentTableEvent);
         passportDataButton.addEventHandler(MouseEvent.MOUSE_CLICKED, openPassportTableEvent);
-        performanceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, opentPerformanceTableEvent);
+        performanceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, openPerformanceTableEvent);
         attendanceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, openAttendanceTableEvent);
         birthCertificateButton.addEventHandler(MouseEvent.MOUSE_CLICKED, openBirthCertificateTableEvent);
         parentsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, openParentsTableEvent);
@@ -230,9 +226,13 @@ public class MainMenu {
         addButton.addEventFilter(MouseEvent.MOUSE_CLICKED, addNoteEvent);
         delButton.addEventFilter(MouseEvent.MOUSE_CLICKED, delNoteEvent);
         editButton.addEventFilter(MouseEvent.MOUSE_CLICKED, editNoteEvent);
-        subButton.addEventFilter(MouseEvent.MOUSE_CLICKED, openSubjectTableEvent);
+        subjectButton.addEventFilter(MouseEvent.MOUSE_CLICKED, openSubjectTableEvent);
 
     }
+
+    /**
+     * Метод невидмириует кнопки
+     */
 
     private void hideNoteEditButtons() {
         addButton.setVisible(false);
@@ -240,9 +240,37 @@ public class MainMenu {
         editButton.setVisible(false);
     }
 
+    /**
+     * Метод включает отображение кнопок
+     */
+
     private void showNoteEditButtons() {
         addButton.setVisible(true);
         delButton.setVisible(true);
+        editButton.setVisible(true);
+    }
+
+    /**
+     * Метод выключает оторажение кнопки вызова отображения таблицы предметов
+     */
+
+    private void offSubButton() {
+        subjectButton.setVisible(false);
+    }
+
+    /**
+     * Метод включает оторажение кнопки вызова отображения таблицы предметов
+     */
+
+    private void onSubButton() {
+        subjectButton.setVisible(true);
+    }
+
+    /**
+     * Метод включает оторажение кнопки вызова отображения таблицы предметов
+     */
+
+    private void onEditButton() {
         editButton.setVisible(true);
     }
 }

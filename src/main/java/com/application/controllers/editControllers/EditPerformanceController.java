@@ -2,15 +2,17 @@ package com.application.controllers.editControllers;
 
 
 import com.application.dao.PerformanceDao;
-import com.application.dao.StudentDao;
 import com.application.dao.SubjectDao;
 import com.application.entities.Performance;
-import com.application.entities.Student;
 import com.application.entities.Subject;
-import com.application.tables.Table;
+import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+/**
+ * Контроллер для окна редактирования записей об успеваемости
+ */
 
 public class EditPerformanceController {
 
@@ -29,15 +31,14 @@ public class EditPerformanceController {
     @FXML
     private Button editButton;
 
-    private Table table;
+    private DisplayTable displayTable;
+
     @FXML
     void initialize() {
-
         editButton.setOnAction(addEvent -> {
             PerformanceDao performanceDao = new PerformanceDao();
 
             Performance performance = performanceDao.findById(Integer.parseInt(perfId.getText()));
-
             performance.setMark(Integer.parseInt(mark.getText()));
 
             SubjectDao subjectDao = new SubjectDao();
@@ -50,18 +51,28 @@ public class EditPerformanceController {
 
             performanceDao.update(performance);
 
-            table.showPerformanceTable();
+            displayTable.showPerformanceTable();
 
-            perfId.clear();
-            id.clear();
-            mark.clear();
-            subjectId.clear();
+            clearFields();
         });
-
-
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    /**
+     * Метод чистит поля ввода
+     */
+
+    private void clearFields() {
+        perfId.clear();
+        id.clear();
+        mark.clear();
+        subjectId.clear();
+    }
+
+    /**
+     * @param displayTable - объект отображения таблицы
+     */
+
+    public void setDisplayTable(DisplayTable displayTable) {
+        this.displayTable = displayTable;
     }
 }

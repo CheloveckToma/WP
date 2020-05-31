@@ -2,13 +2,15 @@ package com.application.controllers.delControllers;
 
 
 import com.application.dao.StudentDao;
-import com.application.entities.Performance;
 import com.application.entities.Student;
-import com.application.entities.Subject;
-import com.application.tables.Table;
+import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+/**
+ * Контроллер для окна удаления записей о студентах
+ */
 
 public class DelStudentController {
 
@@ -18,7 +20,7 @@ public class DelStudentController {
     @FXML
     private Button delButton;
 
-    private Table table;
+    private DisplayTable displayTable;
 
     @FXML
     void initialize() {
@@ -26,14 +28,26 @@ public class DelStudentController {
             StudentDao studentDao = new StudentDao();
             Student student = studentDao.findById(Integer.parseInt(id.getText()));
             studentDao.delete(student);
-            table.showStudentTable();
-            id.clear();
+
+            displayTable.showStudentTable();
+
+            clearFields();
         });
-
-
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    /**
+     * Метод чистит поля ввода
+     */
+
+    private void clearFields() {
+        id.clear();
+    }
+
+    /**
+     * @param displayTable - объект отображения таблицы
+     */
+
+    public void setDisplayTable(DisplayTable displayTable) {
+        this.displayTable = displayTable;
     }
 }

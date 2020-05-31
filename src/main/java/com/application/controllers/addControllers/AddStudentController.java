@@ -2,18 +2,19 @@ package com.application.controllers.addControllers;
 
 
 import com.application.dao.StudentDao;
+import com.application.date.Date;
 import com.application.entities.Address;
 import com.application.entities.BirthCertificate;
 import com.application.entities.PassportData;
 import com.application.entities.Student;
-import com.application.tables.Table;
+import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+/**
+ * Контроллер для окна добавления записи о студнетах
+ */
 
 public class AddStudentController {
 
@@ -74,22 +75,16 @@ public class AddStudentController {
     @FXML
     private Button addButton;
 
-    private Table table;
+    private DisplayTable displayTable;
 
     @FXML
     void initialize() {
-
         addButton.setOnAction(addEvent -> {
             StudentDao studentDao = new StudentDao();
+
             Student student = new Student();
-
-            String[] birhtDate = birthDate.getText().split("-");
-            Calendar calendar = new GregorianCalendar(Integer.parseInt(birhtDate[0]), Integer.parseInt(birhtDate[1]), Integer.parseInt(birhtDate[2]));
-            Date date = new Date();
-            date.setTime(calendar.getTimeInMillis());
-
             student.setStudentFullName(name.getText());
-            student.setBirthDate(date);
+            student.setBirthDate(Date.createObjectDate(birthDate.getText()));
             student.setPhoneNumber(Long.parseLong(phoneNumber.getText()));
 
             Address address = new Address();
@@ -104,60 +99,62 @@ public class AddStudentController {
             birthCertificate.setSeries(Integer.parseInt(birthCertSeries.getText()));
             birthCertificate.setNumber(Integer.parseInt(birthCertNumber.getText()));
             birthCertificate.setIssuedBy(issuedBirthCertBy.getText());
-            birthCertificate.setDateIssue(date);
+            birthCertificate.setDateIssue(Date.createObjectDate(issuedDate.getText()));
 
             student.setBirthCertificate(birthCertificate);
 
             PassportData passport = new PassportData();
             passport.setStudentFullName(name.getText());
-            passport.setBirthDate(date);
+            passport.setBirthDate(Date.createObjectDate(birthDate.getText()));
             passport.setPlaceResidence(placeResidence.getText());
             passport.setSeries(Integer.parseInt(passportSeries.getText()));
             passport.setNumber(Integer.parseInt(passportNumber.getText()));
             passport.setIssuedBy(issuedPassportBy.getText());
-
-            String[] passportDate = issuedDate.getText().split("-");
-
-            calendar = new GregorianCalendar(Integer.parseInt(passportDate[0]), Integer.parseInt(passportDate[1]), Integer.parseInt(passportDate[2]));
-            date = new Date();
-            date.setTime(calendar.getTimeInMillis());
-
-            passport.setDateIssue(date);
+            passport.setDateIssue(Date.createObjectDate(birthDate.getText()));
             passport.setDepartmentCode(Integer.parseInt(depCode.getText()));
             passport.setTin(Integer.parseInt(tinNumber.getText()));
             passport.setSnilsNumber(Integer.parseInt(snilsNumber.getText()));
 
             student.setPassportData(passport);
 
-
             studentDao.save(student);
 
-            table.showStudentTable();
+            displayTable.showStudentTable();
 
-            name.clear();
-            phoneNumber.clear();
-            town.clear();
-            street.clear();
-            houseNumber.clear();
-            flatNumber.clear();
-            issuedBirthCertBy.clear();
-            birthCertNumber.clear();
-            birthCertSeries.clear();
-            birthDate.clear();
-            issuedDate.clear();
-            issuedPassportBy.clear();
-            depCode.clear();
-            passportNumber.clear();
-            passportSeries.clear();
-            placeResidence.clear();
-            snilsNumber.clear();
-            tinNumber.clear();
+            clearFields();
         });
-
-
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    /**
+     * Метод чистит поля ввода
+     */
+
+    private void clearFields(){
+        name.clear();
+        phoneNumber.clear();
+        town.clear();
+        street.clear();
+        houseNumber.clear();
+        flatNumber.clear();
+        issuedBirthCertBy.clear();
+        birthCertNumber.clear();
+        birthCertSeries.clear();
+        birthDate.clear();
+        issuedDate.clear();
+        issuedPassportBy.clear();
+        depCode.clear();
+        passportNumber.clear();
+        passportSeries.clear();
+        placeResidence.clear();
+        snilsNumber.clear();
+        tinNumber.clear();
+    }
+
+    /**
+     * @param displayTable - объект отображения таблицы
+     */
+
+    public void setDisplayTable(DisplayTable displayTable) {
+        this.displayTable = displayTable;
     }
 }

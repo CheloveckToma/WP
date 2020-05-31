@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" stylesheets="@../css/menu.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.controllers.MainMenu">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" stylesheets="@../css/menu.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.controllers.MainWindowController">
    <children>
       <Label text="Label" />
       <HBox alignment="CENTER" prefHeight="104.0" prefWidth="1500.0" style="-fx-background-color: #fbbc05;">
@@ -136,27 +136,27 @@
             </HBox>
          </children>
       </HBox>
-      <TableView id="table" fx:id="table" focusTraversable="false" layoutY="104.0" prefHeight="698.0" prefWidth="1500.0">
+      <TableView id="displayTable" fx:id="displayTable" focusTraversable="false" layoutY="104.0" prefHeight="698.0" prefWidth="1500.0">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy></TableView>
-      <TableView id="table" fx:id="tableAttendance" focusTraversable="false" layoutY="104.0" prefHeight="698.0" prefWidth="1500.0" visible="false">
+      <TableView id="displayTable" fx:id="tableAttendance" focusTraversable="false" layoutY="104.0" prefHeight="698.0" prefWidth="1500.0" visible="false">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy></TableView>
-      <TableView id="table" fx:id="tableParents" focusTraversable="false" layoutY="104.0" prefHeight="698.0" prefWidth="1500.0" visible="false">
+      <TableView id="displayTable" fx:id="tableParents" focusTraversable="false" layoutY="104.0" prefHeight="698.0" prefWidth="1500.0" visible="false">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy></TableView>
-      <TableView id="table" fx:id="tablePerformance" focusTraversable="false" layoutY="104.0" prefHeight="698.0" prefWidth="1500.0" visible="false">
+      <TableView id="displayTable" fx:id="tablePerformance" focusTraversable="false" layoutY="104.0" prefHeight="698.0" prefWidth="1500.0" visible="false">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy></TableView>
-      <TableView id="table" fx:id="tableSubjects" focusTraversable="false" layoutY="104.0" prefHeight="698.0" prefWidth="1500.0" visible="false">
+      <TableView id="displayTable" fx:id="tableSubjects" focusTraversable="false" layoutY="104.0" prefHeight="698.0" prefWidth="1500.0" visible="false">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy></TableView>
-      <ImageView id="imageButton" fx:id="subButton" fitHeight="84.0" fitWidth="74.0" layoutX="335.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView id="imageButton" fx:id="subjectButton" fitHeight="84.0" fitWidth="74.0" layoutX="335.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/subject_icon.png" />
          </image>

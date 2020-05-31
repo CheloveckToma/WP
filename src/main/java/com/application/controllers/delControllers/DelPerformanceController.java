@@ -2,14 +2,15 @@ package com.application.controllers.delControllers;
 
 
 import com.application.dao.PerformanceDao;
-import com.application.dao.StudentDao;
 import com.application.entities.Performance;
-import com.application.entities.Student;
-import com.application.entities.Subject;
-import com.application.tables.Table;
+import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+/**
+ * Контроллер для окна удаления записей об успеваемости
+ */
 
 public class DelPerformanceController {
 
@@ -19,23 +20,34 @@ public class DelPerformanceController {
     @FXML
     private Button addButton;
 
-    private Table table;
+    private DisplayTable displayTable;
 
     @FXML
     void initialize() {
-
         addButton.setOnAction(addEvent -> {
             PerformanceDao performanceDao = new PerformanceDao();
             Performance performance = performanceDao.findById(Integer.parseInt(id.getText()));
             performanceDao.delete(performance);
-            table.showPerformanceTable();
-            id.clear();
+
+            displayTable.showPerformanceTable();
+
+            clearFields();
         });
-
-
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    /**
+     * Метод чистит поля ввода
+     */
+
+    private void clearFields() {
+        id.clear();
+    }
+
+    /**
+     * @param displayTable - объект отображения таблицы
+     */
+
+    public void setDisplayTable(DisplayTable displayTable) {
+        this.displayTable = displayTable;
     }
 }

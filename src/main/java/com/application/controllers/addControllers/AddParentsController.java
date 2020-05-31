@@ -3,10 +3,14 @@ package com.application.controllers.addControllers;
 
 import com.application.dao.StudentDao;
 import com.application.entities.*;
-import com.application.tables.Table;
+import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+/**
+ * Контроллер для окна добавления записей о родителях
+ */
 
 public class AddParentsController {
 
@@ -43,13 +47,11 @@ public class AddParentsController {
     @FXML
     private TextField name;
 
-    private Table table;
+    private DisplayTable displayTable;
 
     @FXML
     void initialize() {
-
         addButton.setOnAction(addEvent -> {
-
             StudentDao studentDao = new StudentDao();
             Student student = studentDao.findById(Integer.parseInt(id.getText()));
 
@@ -71,23 +73,34 @@ public class AddParentsController {
 
             studentDao.update(student);
 
-            table.showParentsTable();
+            displayTable.showParentsTable();
 
-            id.clear();
-            name.clear();
-            phoneNumber.clear();
-            town.clear();
-            street.clear();
-            houseNumber.clear();
-            flatNumber.clear();
-            workPlace.clear();
-            familyStatus.clear();
-            childrenNumber.clear();
+            clearFields();
         });
-
-
     }
-    public void setTable(Table table) {
-        this.table = table;
+
+    /**
+     * Метод чистит поля ввода
+     */
+
+    private void clearFields(){
+        id.clear();
+        name.clear();
+        phoneNumber.clear();
+        town.clear();
+        street.clear();
+        houseNumber.clear();
+        flatNumber.clear();
+        workPlace.clear();
+        familyStatus.clear();
+        childrenNumber.clear();
+    }
+
+    /**
+     * @param displayTable - объект отображения таблицы
+     */
+
+    public void setDisplayTable(DisplayTable displayTable) {
+        this.displayTable = displayTable;
     }
 }

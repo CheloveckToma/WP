@@ -4,10 +4,14 @@ package com.application.controllers.addControllers;
 import com.application.dao.StudentDao;
 import com.application.dao.SubjectDao;
 import com.application.entities.*;
-import com.application.tables.Table;
+import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+/**
+ * Контроллер для окна добавления записей об успеваемости
+ */
 
 public class AddPerformanceController {
 
@@ -23,11 +27,10 @@ public class AddPerformanceController {
     @FXML
     private Button addButton;
 
-    private Table table;
+    private DisplayTable displayTable;
 
     @FXML
     void initialize() {
-
         addButton.setOnAction(addEvent -> {
             StudentDao studentDao = new StudentDao();
 
@@ -35,7 +38,6 @@ public class AddPerformanceController {
 
             Performance performance = new Performance();
             performance.setMark(Integer.parseInt(mark.getText()));
-
             performance.setStudent(student);
 
             SubjectDao subjectDao = new SubjectDao();
@@ -48,17 +50,27 @@ public class AddPerformanceController {
 
             studentDao.update(student);
 
-            table.showPerformanceTable();
+            displayTable.showPerformanceTable();
 
-            id.clear();
-            mark.clear();
-            subjectId.clear();
+            clearFields();
         });
-
-
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    /**
+     * Метод чистит поля ввода
+     */
+
+    private void clearFields() {
+        id.clear();
+        mark.clear();
+        subjectId.clear();
+    }
+
+    /**
+     * @param displayTable - объект отображения таблицы
+     */
+
+    public void setDisplayTable(DisplayTable displayTable) {
+        this.displayTable = displayTable;
     }
 }

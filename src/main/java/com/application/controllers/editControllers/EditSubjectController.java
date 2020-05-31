@@ -1,18 +1,16 @@
 package com.application.controllers.editControllers;
 
 
-import com.application.dao.AttendanceDao;
 import com.application.dao.SubjectDao;
-import com.application.entities.Attendance;
 import com.application.entities.Subject;
-import com.application.tables.Table;
+import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+/**
+ * Контроллер для окна редактирования записей о предметах
+ */
 
 public class EditSubjectController {
 
@@ -28,34 +26,39 @@ public class EditSubjectController {
     @FXML
     private Button editButton;
 
-    private Table table;
+    private DisplayTable displayTable;
 
     @FXML
     void initialize() {
-
         editButton.setOnAction(addEvent -> {
-
             SubjectDao subjectDao = new SubjectDao();
 
             Subject subject = subjectDao.findById(Integer.parseInt(id.getText()));
-
             subject.setSubjectName(subjectName.getText());
             subject.setTeacherName(teacherName.getText());
 
             subjectDao.update(subject);
 
+            displayTable.showSubjectTable();
 
-            subjectName.clear();
-            teacherName.clear();
-
-            table.showSubjectTable();
-
+            clearFields();
         });
-
-
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    /**
+     * Метод чистит поля ввода
+     */
+
+    private void clearFields() {
+        subjectName.clear();
+        teacherName.clear();
+    }
+
+    /**
+     * @param displayTable - объект отображения таблицы
+     */
+
+    public void setDisplayTable(DisplayTable displayTable) {
+        this.displayTable = displayTable;
     }
 }

@@ -1,6 +1,6 @@
 package com.application.main;
 
-import com.application.controllers.editControllers.EditStudentController;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -12,7 +12,11 @@ public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
 
-    public static SessionFactory buildSessionFactory() {
+    /**
+     * Создает фабрику сессий
+     */
+
+    public static void buildSessionFactory() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("config/hibernate.cfg.xml").build();
 
         try {
@@ -22,16 +26,29 @@ public class HibernateUtil {
             throw new ExceptionInInitializerError("Initial SessionFactory failed" + e);
         }
 
-        return sessionFactory;
     }
+
+    /**
+     * @return возвращает фабрику сессий
+     */
 
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
-    public static Session getSession(){
+    /**
+     * Метод открывает новую сессию
+     *
+     * @return возвращает сессию
+     */
+
+    public static Session getSession() {
         return sessionFactory.openSession();
     }
+
+    /**
+     * Метод закрывает сессию
+     */
 
     public static void shutdown() {
         getSessionFactory().close();

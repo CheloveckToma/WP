@@ -11,36 +11,47 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Класс, отображающий таблицы
+ */
 
-public class Table {
+public class DisplayTable {
 
-    private TableView<Student> tableView;
+    private TableView<Student> tableStudent;
     private TableView<Attendance> tableAttendance;
     private TableView<Parent> tableParents;
     private TableView<Performance> tablePerformance;
     private TableView<Subject> tableSubjects;
+    private TableСondition tableСondition;
 
 
-    public Table(TableView<Student> tableView, TableView<Attendance> tableAttendance, TableView<Parent> tableParents, TableView<Performance> tablePerformance, TableView<Subject> tableSubjects) {
-        this.tableView = tableView;
+    public DisplayTable(TableView<Student> tableStudent, TableView<Attendance> tableAttendance, TableView<Parent> tableParents, TableView<Performance> tablePerformance, TableView<Subject> tableSubjects, TableСondition tableСondition) {
+        this.tableStudent = tableStudent;
         this.tableAttendance = tableAttendance;
         this.tablePerformance = tablePerformance;
         this.tableParents = tableParents;
         this.tableSubjects = tableSubjects;
+        this.tableСondition = tableСondition;
     }
 
-    public void showStudentTable() {
-        tableView.getColumns().clear();
+    /**
+     * Метод отображает таблицу студентов
+     */
 
-        offVisibleTables();
+    public void showStudentTable() {
+        tableStudent.getColumns().clear();
+
+        tableСondition = TableСondition.STUDENT;
 
         StudentDao studentDao = new StudentDao();
+
         List<Student> students = studentDao.findAll();
-        tableView.setItems(FXCollections.observableList(students));
+
+        tableStudent.setItems(FXCollections.observableList(students));
 
         TableColumn<Student, Integer> ID = new TableColumn("ID");
-        ID.setCellValueFactory(new PropertyValueFactory("id"));
 
+        ID.setCellValueFactory(new PropertyValueFactory("id"));
         TableColumn<Student, String> address = new TableColumn("address");
         address.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 "г. " + param.getValue().getAddress().getCity() + ", ул. " +
@@ -58,16 +69,25 @@ public class Table {
         TableColumn<Student, String> phoneNumber = new TableColumn("phone number");
         phoneNumber.setCellValueFactory(new PropertyValueFactory("phoneNumber"));
 
+        offVisibleTables();
 
-        tableView.getColumns().addAll(ID, name, address, birthDate, phoneNumber);
+        tableStudent.getColumns().addAll(ID, name, address, birthDate, phoneNumber);
     }
 
+    /**
+     * Метод отображает таблицу паспортных данных
+     */
+
     public void showPassportDataTable() {
-        tableView.getColumns().clear();
-        offVisibleTables();
+        tableStudent.getColumns().clear();
+
+        tableСondition = TableСondition.PASSPORT;
+
         StudentDao studentDao = new StudentDao();
+
         List<Student> students = studentDao.findAll();
-        tableView.setItems(FXCollections.observableList(students));
+
+        tableStudent.setItems(FXCollections.observableList(students));
 
         TableColumn<Student, Integer> ID = new TableColumn("ID");
         ID.setCellValueFactory(param -> new SimpleObjectProperty<>(
@@ -124,12 +144,19 @@ public class Table {
                 param.getValue().getPassportData().getTin()
         ));
 
-        tableView.getColumns().addAll(ID, name, birhtDate, issueDate, issuedBy, departmentCode, number, series, placeBirth, snilsNumber, tin);
+        offVisibleTables();
+
+        tableStudent.getColumns().addAll(ID, name, birhtDate, issueDate, issuedBy, departmentCode, number, series, placeBirth, snilsNumber, tin);
     }
 
+    /**
+     * Метод отображает таблицу предметов
+     */
 
     public void showSubjectTable() {
         tableSubjects.getColumns().clear();
+
+        tableСondition = TableСondition.PARENTS;
 
         SubjectDao subjectDao = new SubjectDao();
 
@@ -149,10 +176,14 @@ public class Table {
         tableSubjects.setVisible(true);
     }
 
+    /**
+     * Метод отображает таблицу успеваемости
+     */
+
     public void showPerformanceTable() {
         tablePerformance.getColumns().clear();
 
-        tablePerformance.getColumns().clear();
+        tableСondition = TableСondition.PERFORMANCE;
 
         PerformanceDao performanceDao = new PerformanceDao();
 
@@ -186,10 +217,14 @@ public class Table {
         tablePerformance.setVisible(true);
     }
 
+    /**
+     * Метод отображает таблицу посещаемости
+     */
+
     public void showAttendanceTable() {
         tableAttendance.getColumns().clear();
 
-        tableAttendance.getColumns().clear();
+        tableСondition = TableСondition.ATTENDANCE;
 
         AttendanceDao attendanceDao = new AttendanceDao();
 
@@ -216,12 +251,20 @@ public class Table {
         tableAttendance.setVisible(true);
     }
 
+    /**
+     * Метод отображает таблицу свидетельства о рождении
+     */
+
     public void showBirthCertificateTable() {
-        tableView.getColumns().clear();
-        offVisibleTables();
+        tableStudent.getColumns().clear();
+
+        tableСondition = TableСondition.BIRTH_CERTIFICATE;
+
         StudentDao studentDao = new StudentDao();
+
         List<Student> students = studentDao.findAll();
-        tableView.setItems(FXCollections.observableList(students));
+
+        tableStudent.setItems(FXCollections.observableList(students));
 
         TableColumn<Student, Integer> ID = new TableColumn("ID");
         ID.setCellValueFactory(param -> new SimpleObjectProperty<>(
@@ -253,12 +296,19 @@ public class Table {
                 param.getValue().getBirthCertificate().getDateIssue()
         ));
 
-        tableView.getColumns().addAll(ID, student, number, series, issuedBy, dateIssue);
+        offVisibleTables();
+
+        tableStudent.getColumns().addAll(ID, student, number, series, issuedBy, dateIssue);
     }
+
+    /**
+     * Метод отображает таблицу родителей
+     */
 
     public void showParentsTable() {
         tableParents.getColumns().clear();
-        tableParents.getColumns().clear();
+
+        tableСondition = TableСondition.PARENTS;
 
         ParentDao parentDao = new ParentDao();
 

@@ -2,20 +2,18 @@ package com.application.controllers.editControllers;
 
 
 import com.application.dao.AttendanceDao;
-import com.application.dao.StudentDao;
+import com.application.date.Date;
 import com.application.entities.Attendance;
-import com.application.entities.Student;
-import com.application.tables.Table;
+import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+/**
+ * Контроллер для окна редактирования записей о посещаемости
+ */
 
 public class EditAttendanceController {
-
 
     @FXML
     private TextField attId;
@@ -32,38 +30,40 @@ public class EditAttendanceController {
     @FXML
     private Button editButton;
 
-    private Table table;
+    private DisplayTable displayTable;
+
     @FXML
     void initialize() {
-
         editButton.setOnAction(addEvent -> {
-
             AttendanceDao attendanceDao = new AttendanceDao();
             Attendance attendance = attendanceDao.findById(Integer.parseInt(attId.getText()));
-
-            String[] attendanceDate = date.getText().split("-");
-            Calendar calendar = new GregorianCalendar(Integer.parseInt(attendanceDate[0]), Integer.parseInt(attendanceDate[1]), Integer.parseInt(attendanceDate[2]));
-            Date attDate = new Date();
-            attDate.setTime(calendar.getTimeInMillis());
-
-            attendance.setDate(attDate);
+            attendance.setDate(Date.createObjectDate(date.getText()));
             attendance.setHours(Integer.parseInt(hours.getText()));
 
             attendanceDao.update(attendance);
 
-            table.showAttendanceTable();
+            displayTable.showAttendanceTable();
 
-            date.clear();
-            hours.clear();
-            stId.clear();
-            attId.clear();
-
+            clearFields();
         });
-
-
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    /**
+     * Метод чистит поля ввода
+     */
+
+    private void clearFields(){
+        date.clear();
+        hours.clear();
+        stId.clear();
+        attId.clear();
+    }
+
+    /**
+     * @param displayTable - объект отображения таблицы
+     */
+
+    public void setDisplayTable(DisplayTable displayTable) {
+        this.displayTable = displayTable;
     }
 }
