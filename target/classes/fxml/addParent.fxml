@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
+   <children>
+      <Label layoutX="214.0" layoutY="-3.0" text="Данные студента">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <VBox layoutY="33.0" prefHeight="30.0" prefWidth="300.0" style="-fx-padding: 0 0 0 10;">
+         <children>
+            <Label prefHeight="30.0" prefWidth="536.0" text="ID студента:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="300.0" layoutY="33.0" prefHeight="30.0" prefWidth="300.0">
+         <children>
+            <TextField fx:id="id" prefHeight="30.0" prefWidth="300.0" />
+         </children>
+      </VBox>
+      <Label layoutX="191.0" layoutY="93.0" text="Данные проживания">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <VBox layoutY="128.0" prefHeight="106.0" prefWidth="300.0" style="-fx-padding: 0 0 0 10;">
+         <children>
+            <Label prefHeight="30.0" prefWidth="357.0" text="Город:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="388.0" text="Улица:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="435.0" text="Номер дома:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="457.0" text="Номер квартиры:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="300.0" layoutY="128.0" prefHeight="120.0" prefWidth="300.0">
+         <children>
+            <TextField fx:id="town" prefHeight="30.0" prefWidth="300.0" />
+            <TextField fx:id="street" prefHeight="30.0" prefWidth="300.0" />
+            <TextField fx:id="houseNumber" prefHeight="30.0" prefWidth="300.0" />
+            <TextField fx:id="flatNumber" prefHeight="30.0" prefWidth="300.0" />
+         </children>
+      </VBox>
+      <Label layoutX="213.0" layoutY="345.0" text="Прочие данные">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <VBox layoutY="380.0" prefHeight="60.0" prefWidth="300.0" style="-fx-padding: 0 0 0 10;">
+         <children>
+            <Label prefHeight="30.0" prefWidth="435.0" text="Место работы:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="435.0" text="Статус семьи">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="300.0" text="Номер телефона:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="300.0" text="Кол-во детей в семье:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="300.0" layoutY="380.0" prefHeight="120.0" prefWidth="300.0">
+         <children>
+            <TextField fx:id="workPlace" prefHeight="30.0" prefWidth="300.0" />
+            <TextField fx:id="familyStatus" prefHeight="30.0" prefWidth="300.0" />
+            <TextField fx:id="phoneNumber" prefHeight="30.0" prefWidth="300.0" />
+            <TextField fx:id="childrenNumber" prefHeight="30.0" prefWidth="300.0" />
+         </children>
+      </VBox>
+      <Button fx:id="addButton" layoutX="247.0" layoutY="527.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="119.0" text="Добавить">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <VBox layoutY="285.0" prefHeight="30.0" prefWidth="300.0" style="-fx-padding: 0 0 0 10;" />
+      <Label layoutX="226.0" layoutY="268.0" text="Ваши данные">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="6.0" layoutY="315.0" prefHeight="30.0" prefWidth="300.0" text="ФИО:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <VBox alignment="TOP_CENTER" layoutX="300.0" layoutY="315.0" prefHeight="30.0" prefWidth="300.0">
+         <children>
+            <TextField fx:id="name" prefHeight="30.0" prefWidth="300.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

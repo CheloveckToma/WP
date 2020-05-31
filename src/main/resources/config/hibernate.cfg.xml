@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost/students_info?serverTimezone=Europe/Moscow&amp;useSSL=false</property>
+    <property name="connection.username">mysql</property>
+    <property name="connection.password">mysql</property>
+
+    <property name="hibernate.dialect">org.hibernate.dialect.MariaDB103Dialect</property>
+
+    <property name="connection.pool_size">30</property>
+
+    <property name="show_sql">true</property>
+
+    <property name="hibernate.hbm2ddl.auto">update</property>
+
+    <mapping class="com.application.entities.Student" />
+    <mapping class="com.application.entities.Address" />
+    <mapping class="com.application.entities.PassportData" />
+    <mapping class="com.application.entities.BirthCertificate" />
+    <mapping class="com.application.entities.Parent" />
+    <mapping class="com.application.entities.Attendance" />
+    <mapping class="com.application.entities.Performance" />
+    <mapping class="com.application.entities.Subject" />
+
+  </session-factory>
+</hibernate-configuration>
