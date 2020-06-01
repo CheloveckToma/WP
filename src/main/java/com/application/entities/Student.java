@@ -2,10 +2,7 @@ package com.application.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "students")
@@ -14,7 +11,7 @@ public class Student implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "student_full_name")
     private String studentFullName;
@@ -44,6 +41,9 @@ public class Student implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private List<Attendance> attendance = new ArrayList<Attendance>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private List<Performance> performance = new ArrayList<Performance>();
+
     public List<Parent> getParents() {
         return parents;
     }
@@ -56,19 +56,6 @@ public class Student implements Serializable {
         return performance;
     }
 
-
-
-    public List<Performance> getPerformance2() {
-        List<Performance> performances = new ArrayList<>();
-        for (Performance performance : this.getPerformance()) {
-            performances.add(performance);
-        }
-        return performances;
-    }
-
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private List<Performance> performance = new ArrayList<Performance>();
 
     public Student() {
 
@@ -146,16 +133,28 @@ public class Student implements Serializable {
         this.performance.add(performance);
     }
 
-
-    public void setParents(List<Parent> parents) {
-        this.parents = parents;
-    }
-
     public void setAttendance(List<Attendance> attendance) {
         this.attendance = attendance;
     }
 
     public void setPerformance(List<Performance> performance) {
         this.performance = performance;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || obj.getClass() != obj.getClass())
+            return false;
+
+        Student student = (Student) obj;
+        return id.equals(student.id) &&
+                Objects.equals(student.studentFullName, studentFullName) &&
+                Objects.equals(student.birthDate, birthDate) &&
+                Objects.equals(student.phoneNumber, phoneNumber) &&
+                Objects.equals(student.address, address) &&
+                Objects.equals(student.birthCertificate, birthCertificate) &&
+                Objects.equals(student.passportData, passportData);
     }
 }

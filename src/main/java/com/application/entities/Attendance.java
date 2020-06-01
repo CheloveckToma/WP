@@ -3,7 +3,7 @@ package com.application.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.Objects;
 
 @Entity
 @Table(name = "attendance")
@@ -12,7 +12,7 @@ public class Attendance implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "students_id")
@@ -22,7 +22,7 @@ public class Attendance implements Serializable {
     private Date date;
 
     @Column(name = "hours")
-    private int hours;
+    private Integer hours;
 
     public Student getStudent() {
         return student;
@@ -54,5 +54,18 @@ public class Attendance implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || obj.getClass() != obj.getClass())
+            return false;
+
+        Attendance attendance = (Attendance)obj;
+        return id.equals(attendance.id) &&
+                Objects.equals(hours, attendance.hours) &&
+                Objects.equals(date, attendance.date);
     }
 }

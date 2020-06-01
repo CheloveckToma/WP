@@ -1,6 +1,7 @@
 package com.application.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +11,7 @@ public class Parent implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "family_status")
     private String familyStatus;
@@ -100,5 +101,22 @@ public class Parent implements Serializable {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || obj.getClass() != obj.getClass())
+            return false;
+
+        Parent parent = (Parent)obj;
+        return id.equals(parent.id) &&
+                Objects.equals(parentFullName, parent.parentFullName) &&
+                Objects.equals(familyStatus, parent.familyStatus) &&
+                Objects.equals(numberChildren, parent.numberChildren) &&
+                Objects.equals(phoneNumber, parent.phoneNumber) &&
+                Objects.equals(placeWork, parent.placeWork) &&
+                address.equals(parent.address);
     }
 }

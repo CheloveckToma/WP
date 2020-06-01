@@ -79,12 +79,14 @@ public class MainWindowController {
 
         EventHandler<MouseEvent> openStudentTableEvent = e -> {
             tableDisplay.showStudentTable();
+            tableСondition  = tableDisplay.getTableСondition();
             showNoteEditButtons();
             offSubButton();
         };
 
         EventHandler<MouseEvent> openPassportTableEvent = e -> {
             tableDisplay.showPassportDataTable();
+            tableСondition  = tableDisplay.getTableСondition();
             hideNoteEditButtons();
             onEditButton();
             offSubButton();
@@ -93,18 +95,21 @@ public class MainWindowController {
 
         EventHandler<MouseEvent> openPerformanceTableEvent = e -> {
             tableDisplay.showPerformanceTable();
+            tableСondition  = tableDisplay.getTableСondition();
             showNoteEditButtons();
             onSubButton();
         };
 
         EventHandler<MouseEvent> openAttendanceTableEvent = e -> {
             tableDisplay.showAttendanceTable();
+            tableСondition  = tableDisplay.getTableСondition();
             showNoteEditButtons();
             offSubButton();
         };
 
         EventHandler<MouseEvent> openBirthCertificateTableEvent = e -> {
             tableDisplay.showBirthCertificateTable();
+            tableСondition  = tableDisplay.getTableСondition();
             hideNoteEditButtons();
             onEditButton();
             offSubButton();
@@ -112,12 +117,14 @@ public class MainWindowController {
 
         EventHandler<MouseEvent> openParentsTableEvent = e -> {
             tableDisplay.showParentsTable();
+            tableСondition  = tableDisplay.getTableСondition();
             showNoteEditButtons();
             offSubButton();
         };
 
         EventHandler<MouseEvent> openSubjectTableEvent = e -> {
             tableDisplay.showSubjectTable();
+            tableСondition  = tableDisplay.getTableСondition();
             offSubButton();
         };
 

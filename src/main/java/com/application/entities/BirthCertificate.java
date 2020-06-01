@@ -2,6 +2,7 @@ package com.application.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "birth_certificate")
@@ -10,13 +11,13 @@ public class BirthCertificate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "series")
-    private int series;
+    private Integer series;
 
     @Column(name = "number")
-    private int number;
+    private Integer number;
 
     @Column(name = "issued_by")
     private String issuedBy;
@@ -78,5 +79,20 @@ public class BirthCertificate implements Serializable {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || obj.getClass() != obj.getClass())
+            return false;
+
+        BirthCertificate birthCertificate = (BirthCertificate)obj;
+        return  id.equals(birthCertificate.id) &&
+                Objects.equals(series, birthCertificate.series) &&
+                Objects.equals(number, birthCertificate.number) &&
+                Objects.equals(issuedBy, birthCertificate.issuedBy) &&
+                dateIssue.equals(birthCertificate.dateIssue);
     }
 }

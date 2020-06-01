@@ -3,6 +3,7 @@ package com.application.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "subject")
@@ -11,7 +12,7 @@ public class Subject implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "subject")
     private String subjectName;
@@ -58,6 +59,19 @@ public class Subject implements Serializable {
     public void addPerformance(Performance performance) {
         performance.setSubject(this);
         this.performance.add(performance);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || obj.getClass() != obj.getClass())
+            return false;
+
+        Subject subject = (Subject) obj;
+        return id.equals(subject.id)&&
+                Objects.equals(subjectName, subject.subjectName) &&
+                Objects.equals(teacherName, subject.teacherName);
     }
 }
 

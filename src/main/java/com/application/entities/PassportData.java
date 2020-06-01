@@ -3,6 +3,7 @@ package com.application.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "passport_data")
@@ -11,7 +12,7 @@ public class PassportData implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "student_full_name")
     private String studentFullName;
@@ -24,10 +25,10 @@ public class PassportData implements Serializable {
     private String placeResidence;
 
     @Column(name = "series")
-    private int series;
+    private Integer series;
 
     @Column(name = "number")
-    private int number;
+    private Integer number;
 
     @Column(name = "issued_by")
     private String issuedBy;
@@ -37,13 +38,13 @@ public class PassportData implements Serializable {
     private Date dateIssue;
 
     @Column(name = "department_code")
-    private int departmentCode;
+    private Integer departmentCode;
 
     @Column(name = "tin")
-    private long tin;
+    private Long tin;
 
     @Column(name = "snils_number")
-    private long snilsNumber;
+    private Long snilsNumber;
 
     @OneToOne(mappedBy = "passportData")
     private Student student;
@@ -145,5 +146,29 @@ public class PassportData implements Serializable {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || obj.getClass() != obj.getClass())
+            return false;
+
+        PassportData passportData = (PassportData)obj;
+        return id.equals(passportData.id) &&
+                Objects.equals(studentFullName, passportData.studentFullName) &&
+                Objects.equals(number, passportData.number) &&
+                Objects.equals(birthDate, passportData.birthDate) &&
+                Objects.equals(dateIssue, passportData.dateIssue) &&
+                placeResidence.equals(passportData.placeResidence) &&
+                Objects.equals(series, passportData.series) &&
+                Objects.equals(number, passportData.number) &&
+                Objects.equals(issuedBy, passportData.issuedBy) &&
+                Objects.equals(dateIssue, passportData.dateIssue) &&
+                Objects.equals(departmentCode, passportData.departmentCode) &&
+                Objects.equals(dateIssue, passportData.dateIssue) &&
+                Objects.equals(tin, passportData.tin) &&
+                Objects.equals(snilsNumber, passportData.snilsNumber);
     }
 }

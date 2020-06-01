@@ -52,7 +52,7 @@ public class DisplayTable {
         TableColumn<Student, Integer> ID = new TableColumn("ID");
 
         ID.setCellValueFactory(new PropertyValueFactory("id"));
-        TableColumn<Student, String> address = new TableColumn("address");
+        TableColumn<Student, String> address = new TableColumn("Адрес");
         address.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 "г. " + param.getValue().getAddress().getCity() + ", ул. " +
                         param.getValue().getAddress().getStreet() + ", дом " +
@@ -60,13 +60,13 @@ public class DisplayTable {
                         param.getValue().getAddress().getFlatNumber()
         ));
 
-        TableColumn<Student, String> name = new TableColumn("Name");
+        TableColumn<Student, String> name = new TableColumn("Имя");
         name.setCellValueFactory(new PropertyValueFactory("studentFullName"));
 
-        TableColumn<Student, String> birthDate = new TableColumn("birth date");
+        TableColumn<Student, String> birthDate = new TableColumn("Дата рождения");
         birthDate.setCellValueFactory(new PropertyValueFactory("birthDate"));
 
-        TableColumn<Student, String> phoneNumber = new TableColumn("phone number");
+        TableColumn<Student, String> phoneNumber = new TableColumn("Номер телефона");
         phoneNumber.setCellValueFactory(new PropertyValueFactory("phoneNumber"));
 
         offVisibleTables();
@@ -94,52 +94,52 @@ public class DisplayTable {
                 param.getValue().getPassportData().getId()
         ));
 
-        TableColumn<Student, String> name = new TableColumn("name");
+        TableColumn<Student, String> name = new TableColumn("Имя");
         name.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getPassportData().getStudentFullName()
         ));
 
-        TableColumn<Student, Date> birhtDate = new TableColumn("birht date");
+        TableColumn<Student, Date> birhtDate = new TableColumn("Дата рождения");
         birhtDate.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getPassportData().getBirthDate()
         ));
 
-        TableColumn<Student, Date> issueDate = new TableColumn("issue date");
+        TableColumn<Student, Date> issueDate = new TableColumn("Дата выдачи");
         issueDate.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getPassportData().getDateIssue()
         ));
 
-        TableColumn<Student, String> issuedBy = new TableColumn("issued by");
+        TableColumn<Student, String> issuedBy = new TableColumn("Кем выдан");
         issuedBy.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getPassportData().getIssuedBy()
         ));
 
-        TableColumn<Student, Integer> departmentCode = new TableColumn("department code");
+        TableColumn<Student, Integer> departmentCode = new TableColumn("Код департамента");
         departmentCode.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getPassportData().getDepartmentCode()
         ));
 
-        TableColumn<Student, Integer> number = new TableColumn("number");
+        TableColumn<Student, Integer> number = new TableColumn("Номер");
         number.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getPassportData().getNumber()
         ));
 
-        TableColumn<Student, Integer> series = new TableColumn("series");
+        TableColumn<Student, Integer> series = new TableColumn("Серия");
         series.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getPassportData().getSeries()
         ));
 
-        TableColumn<Student, String> placeBirth = new TableColumn("place birth");
+        TableColumn<Student, String> placeBirth = new TableColumn("Место рождения");
         placeBirth.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getPassportData().getPlaceBirth()
         ));
 
-        TableColumn<Student, Long> snilsNumber = new TableColumn("snils number");
+        TableColumn<Student, Long> snilsNumber = new TableColumn("Номер СНИЛС");
         snilsNumber.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getPassportData().getSnilsNumber()
         ));
 
-        TableColumn<Student, Long> tin = new TableColumn("tin");
+        TableColumn<Student, Long> tin = new TableColumn("ИНН");
         tin.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getPassportData().getTin()
         ));
@@ -165,10 +165,10 @@ public class DisplayTable {
         TableColumn<Subject, Integer> numberDiscipline = new TableColumn<>("ID");
         numberDiscipline.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        TableColumn<Subject, String> nameDiscipline = new TableColumn<>("subject ID");
+        TableColumn<Subject, String> nameDiscipline = new TableColumn<>("ID предмета");
         nameDiscipline.setCellValueFactory(new PropertyValueFactory<>("subjectName"));
 
-        TableColumn<Subject, String> fullNameTeacher = new TableColumn<>("teacher");
+        TableColumn<Subject, String> fullNameTeacher = new TableColumn<>("Учитель");
         fullNameTeacher.setCellValueFactory(new PropertyValueFactory<>("teacherName"));
 
         tableSubjects.getColumns().addAll(numberDiscipline, nameDiscipline, fullNameTeacher);
@@ -192,20 +192,20 @@ public class DisplayTable {
         TableColumn<Performance, Integer> numberPerformance = new TableColumn<>("ID");
         numberPerformance.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        TableColumn<Performance, String> fullNameStudent = new TableColumn<>("student");
+        TableColumn<Performance, String> fullNameStudent = new TableColumn<>("Студент");
         fullNameStudent.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getStudent().getStudentFullName()
         ));
 
-        TableColumn<Performance, Integer> mark = new TableColumn<>("mark");
+        TableColumn<Performance, Integer> mark = new TableColumn<>("Оценка");
         mark.setCellValueFactory(new PropertyValueFactory<>("mark"));
 
-        TableColumn<Performance, String> discipline = new TableColumn<>("subject");
+        TableColumn<Performance, String> discipline = new TableColumn<>("Предмет");
         discipline.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getSubject().getSubjectName()
         ));
 
-        TableColumn<Performance, String> teacher = new TableColumn<>("teacher");
+        TableColumn<Performance, String> teacher = new TableColumn<>("Учитель");
         teacher.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getSubject().getTeacherName()
         ));
@@ -233,15 +233,15 @@ public class DisplayTable {
         TableColumn<Attendance, Integer> numberAttendance = new TableColumn<>("ID");
         numberAttendance.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        TableColumn<Attendance, String> fullNameStudent = new TableColumn<>("student");
+        TableColumn<Attendance, String> fullNameStudent = new TableColumn<>("Студент");
         fullNameStudent.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getStudent().getStudentFullName()
         ));
 
-        TableColumn<Attendance, Integer> numberHours = new TableColumn<>("hours");
+        TableColumn<Attendance, Integer> numberHours = new TableColumn<>("Часы отсутствия");
         numberHours.setCellValueFactory(new PropertyValueFactory<>("hours"));
 
-        TableColumn<Attendance, Date> date = new TableColumn<>("date");
+        TableColumn<Attendance, Date> date = new TableColumn<>("Дата посещения");
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         tableAttendance.getColumns().addAll(numberAttendance, fullNameStudent, numberHours, date);
@@ -271,27 +271,27 @@ public class DisplayTable {
                 param.getValue().getBirthCertificate().getId()
         ));
 
-        TableColumn<Student, String> student = new TableColumn("student");
+        TableColumn<Student, String> student = new TableColumn("Студент");
         student.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getBirthCertificate().getStudent().getStudentFullName()
         ));
 
-        TableColumn<Student, Integer> number = new TableColumn("number");
+        TableColumn<Student, Integer> number = new TableColumn("Номер");
         number.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getBirthCertificate().getNumber()
         ));
 
-        TableColumn<Student, Integer> series = new TableColumn("series");
+        TableColumn<Student, Integer> series = new TableColumn("Серия");
         series.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getBirthCertificate().getSeries()
         ));
 
-        TableColumn<Student, String> issuedBy = new TableColumn("issued by");
+        TableColumn<Student, String> issuedBy = new TableColumn("Кем выдан");
         issuedBy.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getBirthCertificate().getIssuedBy()
         ));
 
-        TableColumn<Student, Date> dateIssue = new TableColumn("date issue");
+        TableColumn<Student, Date> dateIssue = new TableColumn("Дата выдачи");
         dateIssue.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getBirthCertificate().getDateIssue()
         ));
@@ -317,27 +317,27 @@ public class DisplayTable {
         TableColumn<Parent, Integer> numberParent = new TableColumn<>("ID");
         numberParent.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        TableColumn<Parent, String> fullNameStudent = new TableColumn<>("student");
+        TableColumn<Parent, String> fullNameStudent = new TableColumn<>("Студент");
         fullNameStudent.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 param.getValue().getStudent().getStudentFullName()
         ));
 
-        TableColumn<Parent, String> fullName = new TableColumn<>("parent");
+        TableColumn<Parent, String> fullName = new TableColumn<>("Родитель");
         fullName.setCellValueFactory(new PropertyValueFactory<>("parentFullName"));
 
-        TableColumn<Parent, String> familyStatus = new TableColumn<>("status");
+        TableColumn<Parent, String> familyStatus = new TableColumn<>("Статус");
         familyStatus.setCellValueFactory(new PropertyValueFactory<>("familyStatus"));
 
-        TableColumn<Parent, Integer> numberChildren = new TableColumn<>("children number");
+        TableColumn<Parent, Integer> numberChildren = new TableColumn<>("Кол-во детей");
         numberChildren.setCellValueFactory(new PropertyValueFactory<>("numberChildren"));
 
-        TableColumn<Parent, Long> phoneNumber = new TableColumn<>("phone number");
+        TableColumn<Parent, Long> phoneNumber = new TableColumn<>("Номер телефона");
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
-        TableColumn<Parent, String> placeWork = new TableColumn<>("work place");
+        TableColumn<Parent, String> placeWork = new TableColumn<>("Место работы");
         placeWork.setCellValueFactory(new PropertyValueFactory<>("placeWork"));
 
-        TableColumn<Parent, String> address = new TableColumn<>("residence address");
+        TableColumn<Parent, String> address = new TableColumn<>("Место прописки");
         address.setCellValueFactory(param -> new SimpleObjectProperty<>(
                 "г. " + param.getValue().getAddress().getCity() + ", ул. " +
                         param.getValue().getAddress().getStreet() + ", дом " +
@@ -358,6 +358,10 @@ public class DisplayTable {
         tableAttendance.setVisible(false);
         tableParents.setVisible(false);
         tableSubjects.setVisible(false);
+    }
+
+    public TableСondition getTableСondition() {
+        return tableСondition;
     }
 }
 

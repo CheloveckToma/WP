@@ -13,8 +13,12 @@ public class AttendanceDao {
     private Session session = HibernateUtil.getSession();
 
     public Attendance findById(int id) {
-        return session.get(Attendance.class, id);
+        Session session = HibernateUtil.getSession();
+        Attendance attendance = session.get(Attendance.class, id);
+        session.close();
+        return attendance;
     }
+
     public List<Attendance> findAll() {
         return (List<Attendance>) HibernateUtil.getSessionFactory().openSession().createQuery("FROM Attendance").list();
     }
@@ -39,6 +43,7 @@ public class AttendanceDao {
         tr.commit();
         session.close();
     }
+
     public void closeSession() {
         if (session.isOpen())
             session.close();

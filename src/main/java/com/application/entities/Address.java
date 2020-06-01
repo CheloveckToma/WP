@@ -2,6 +2,7 @@ package com.application.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "address")
@@ -10,7 +11,7 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "city")
     private String city;
@@ -19,10 +20,10 @@ public class Address implements Serializable {
     private String street;
 
     @Column(name = "house_number")
-    private int houseNumber;
+    private Integer houseNumber;
 
     @Column(name = "flat_number")
-    private int flatNumber;
+    private Integer flatNumber;
 
     @OneToOne(mappedBy = "address")
     private Student student;
@@ -88,6 +89,20 @@ public class Address implements Serializable {
 
     public void setParent(Parent parent) {
         this.parent = parent;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || obj.getClass() != obj.getClass())
+            return false;
+
+        Address address = (Address)obj;
+        return Objects.equals(address.city,city)&&
+                Objects.equals(address.flatNumber,flatNumber)&&
+                Objects.equals(address.houseNumber,houseNumber)&&
+                Objects.equals(address.street,street);
     }
 }
 
