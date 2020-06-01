@@ -1,13 +1,15 @@
 package com.application.controllers.editControllers;
 
 
-import com.application.dao.BirthCertificateDao;
+import com.application.daoTest.BirthCertificateDao;
 import com.application.date.Date;
 import com.application.entities.BirthCertificate;
+import com.application.main.HibernateUtil;
 import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.hibernate.Session;
 
 /**
  * Контроллер для окна редактирования записей об свидетельстве о рождении
@@ -38,7 +40,9 @@ public class EditBirthCertController {
     @FXML
     void initialize() {
         editButton.setOnAction(addEvent -> {
-            BirthCertificateDao birthCertificateDao = new BirthCertificateDao();
+            Session session = HibernateUtil.getSession();
+
+            BirthCertificateDao birthCertificateDao = new BirthCertificateDao(session);
 
             BirthCertificate birthCertificate = birthCertificateDao.findById(Integer.parseInt(id.getText()));
             birthCertificate.setDateIssue(Date.createObjectDate(issuedDate.getText()));
@@ -47,6 +51,8 @@ public class EditBirthCertController {
             birthCertificate.setSeries(Integer.parseInt(series.getText()));
 
             birthCertificateDao.update(birthCertificate);
+
+            session.close();
 
             displayTable.showBirthCertificateTable();
 

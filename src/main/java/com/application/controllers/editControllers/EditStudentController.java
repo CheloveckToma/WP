@@ -1,12 +1,13 @@
 package com.application.controllers.editControllers;
 
 
-import com.application.dao.StudentDao;
+import com.application.daoTest.StudentDao;
 import com.application.date.Date;
 import com.application.entities.Address;
 import com.application.entities.BirthCertificate;
 import com.application.entities.PassportData;
 import com.application.entities.Student;
+import com.application.main.HibernateUtil;
 import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -86,7 +87,9 @@ public class EditStudentController {
     @FXML
     void initialize() {
         editButton.setOnAction(addEvent -> {
-            StudentDao studentDao = new StudentDao();
+            Session session = HibernateUtil.getSession();
+
+            StudentDao studentDao = new StudentDao(session);
 
             Student student = studentDao.findById(Integer.parseInt(id.getText()));
             student.setStudentFullName(name.getText());
@@ -124,6 +127,8 @@ public class EditStudentController {
             student.setPassportData(passport);
 
             studentDao.save(student);
+
+            session.close();
 
             displayTable.showStudentTable();
 

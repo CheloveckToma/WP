@@ -1,48 +1,42 @@
-package com.application.dao;
+package com.application.daoTest;
 
 import com.application.entities.Address;
-import com.application.entities.Subject;
-import com.application.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
 public class AddressDao {
+    private Session session;
 
-    private Session session = HibernateUtil.getSession();
+    public AddressDao(Session session) {
+        this.session = session;
+    }
 
     public Address findById(int id) {
         return session.get(Address.class, id);
     }
 
     public List<Address> findAll() {
-        return (List<Address>) HibernateUtil.getSessionFactory().openSession().createQuery("FROM Address").list();
+        return (List<Address>) session.createQuery("FROM Address").list();
     }
 
     public void save(Address address) {
         Transaction tr = session.beginTransaction();
         session.save(address);
         tr.commit();
-        session.close();
     }
 
     public void update(Address address) {
         Transaction tr = session.beginTransaction();
         session.update(address);
         tr.commit();
-        session.close();
     }
 
     public void delete(Address address) {
         Transaction tr = session.beginTransaction();
         session.delete(address);
         tr.commit();
-        session.close();
-    }
-
-    public void closeSession() {
-        if (session.isOpen())
-            session.close();
     }
 }
+

@@ -1,13 +1,15 @@
 package com.application.controllers.addControllers;
 
 
-import com.application.dao.StudentDao;
+import com.application.daoTest.StudentDao;
 import com.application.date.Date;
 import com.application.entities.*;
+import com.application.main.HibernateUtil;
 import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.hibernate.Session;
 
 /**
  * Контроллер для окна добавления записей о посещаемости
@@ -32,7 +34,9 @@ public class AddAttendanceController {
     @FXML
     void initialize() {
         addButton.setOnAction(addEvent -> {
-            StudentDao studentDao = new StudentDao();
+            Session session = HibernateUtil.getSession();
+
+            StudentDao studentDao = new StudentDao(session);
 
             Student student = studentDao.findById(Integer.parseInt(id.getText()));
 
@@ -43,6 +47,8 @@ public class AddAttendanceController {
             student.addAttendance(attendance);
 
             studentDao.update(student);
+
+            session.close();
 
             displayTable.showAttendanceTable();
 

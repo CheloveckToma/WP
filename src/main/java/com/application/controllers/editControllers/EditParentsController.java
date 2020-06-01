@@ -1,13 +1,15 @@
 package com.application.controllers.editControllers;
 
 
-import com.application.dao.ParentDao;
+import com.application.daoTest.ParentDao;
 import com.application.entities.Address;
 import com.application.entities.Parent;
+import com.application.main.HibernateUtil;
 import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.hibernate.Session;
 
 /**
  * Контроллер для окна редактирования записей об родителях
@@ -56,7 +58,9 @@ public class EditParentsController {
     @FXML
     void initialize() {
         editButton.setOnAction(addEvent -> {
-            ParentDao parentDao = new ParentDao();
+            Session session  = HibernateUtil.getSession();
+
+            ParentDao parentDao = new ParentDao(session);
 
             Parent parent = parentDao.findById(Integer.parseInt(parentId.getText()));
             parent.setFamilyStatus(familyStatus.getText());
@@ -74,6 +78,8 @@ public class EditParentsController {
             parent.setAddress(address);
 
             parentDao.update(parent);
+
+            session.close();
 
             displayTable.showParentsTable();
 

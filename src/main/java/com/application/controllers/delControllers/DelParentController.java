@@ -1,12 +1,14 @@
 package com.application.controllers.delControllers;
 
 
-import com.application.dao.ParentDao;;
+import com.application.daoTest.ParentDao;;
 import com.application.entities.Parent;
+import com.application.main.HibernateUtil;
 import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.hibernate.Session;
 
 /**
  *  Контроллер для окна удаления записей о родителях
@@ -25,9 +27,13 @@ public class DelParentController {
     @FXML
     void initialize() {
         delButton.setOnAction(addEvent -> {
-            ParentDao parentDao = new ParentDao();
+            Session session = HibernateUtil.getSession();
+
+            ParentDao parentDao = new ParentDao(session);
             Parent parent = parentDao.findById(Integer.parseInt(id.getText()));
             parentDao.delete(parent);
+
+            session.close();
 
             displayTable.showParentsTable();
 

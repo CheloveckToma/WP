@@ -1,12 +1,14 @@
 package com.application.controllers.delControllers;
 
 
-import com.application.dao.PerformanceDao;
+import com.application.daoTest.PerformanceDao;
 import com.application.entities.Performance;
+import com.application.main.HibernateUtil;
 import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.hibernate.Session;
 
 /**
  * Контроллер для окна удаления записей об успеваемости
@@ -25,9 +27,13 @@ public class DelPerformanceController {
     @FXML
     void initialize() {
         addButton.setOnAction(addEvent -> {
-            PerformanceDao performanceDao = new PerformanceDao();
+            Session session = HibernateUtil.getSession();
+
+            PerformanceDao performanceDao = new PerformanceDao(session);
             Performance performance = performanceDao.findById(Integer.parseInt(id.getText()));
             performanceDao.delete(performance);
+
+            session.close();
 
             displayTable.showPerformanceTable();
 

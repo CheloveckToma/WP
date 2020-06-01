@@ -1,13 +1,15 @@
 package com.application.controllers.editControllers;
 
 
-import com.application.dao.PassportDataDao;
+import com.application.daoTest.PassportDataDao;
 import com.application.date.Date;
 import com.application.entities.PassportData;
+import com.application.main.HibernateUtil;
 import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.hibernate.Session;
 
 /**
  * Контроллер для окна редактирования записей паспортных данных
@@ -55,7 +57,9 @@ public class EditPassportDataController {
     @FXML
     void initialize() {
         editButton.setOnAction(addEvent -> {
-            PassportDataDao passportDataDao = new PassportDataDao();
+            Session session = HibernateUtil.getSession();
+
+            PassportDataDao passportDataDao = new PassportDataDao(session);
 
             PassportData passportData = passportDataDao.findById(Integer.parseInt(passportId.getText()));
             passportData.setBirthDate(Date.createObjectDate(birthDate.getText()));
@@ -70,6 +74,8 @@ public class EditPassportDataController {
             passportData.setTin(Integer.parseInt(tinNumber.getText()));
 
             passportDataDao.update(passportData);
+
+            session.close();
 
             displayTable.showPassportDataTable();
 

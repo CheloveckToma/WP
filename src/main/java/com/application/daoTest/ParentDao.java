@@ -1,8 +1,6 @@
-package com.application.dao;
+package com.application.daoTest;
 
 import com.application.entities.Parent;
-import com.application.entities.Subject;
-import com.application.main.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -10,42 +8,35 @@ import java.util.List;
 
 public class ParentDao  {
 
-    private Session session = HibernateUtil.getSession();
+    private Session session;
+
+    public ParentDao(Session session) {
+        this.session = session;
+    }
 
     public Parent findById(int id) {
         return session.get(Parent.class, id);
     }
 
-
     public List<Parent> findAll() {
-        return (List<Parent>) HibernateUtil.getSessionFactory().openSession().createQuery("FROM Parent").list();
+        return (List<Parent>) session.createQuery("FROM Parent").list();
     }
-
 
     public void save(Parent parent) {
         Transaction tr = session.beginTransaction();
         session.save(parent);
         tr.commit();
-        session.close();
     }
-
 
     public void update(Parent parent) {
         Transaction tr = session.beginTransaction();
         session.update(parent);
         tr.commit();
-        session.close();
     }
 
     public void delete(Parent parent) {
         Transaction tr = session.beginTransaction();
         session.delete(parent);
         tr.commit();
-        session.close();
-    }
-
-    public void closeSession() {
-        if (session.isOpen())
-            session.close();
     }
 }

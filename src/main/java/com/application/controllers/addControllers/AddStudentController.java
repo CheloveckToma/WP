@@ -1,16 +1,18 @@
 package com.application.controllers.addControllers;
 
 
-import com.application.dao.StudentDao;
+import com.application.daoTest.StudentDao;
 import com.application.date.Date;
 import com.application.entities.Address;
 import com.application.entities.BirthCertificate;
 import com.application.entities.PassportData;
 import com.application.entities.Student;
+import com.application.main.HibernateUtil;
 import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.hibernate.Session;
 
 /**
  * Контроллер для окна добавления записи о студнетах
@@ -80,7 +82,9 @@ public class AddStudentController {
     @FXML
     void initialize() {
         addButton.setOnAction(addEvent -> {
-            StudentDao studentDao = new StudentDao();
+            Session session = HibernateUtil.getSession();
+
+            StudentDao studentDao = new StudentDao(session);
 
             Student student = new Student();
             student.setStudentFullName(name.getText());
@@ -118,6 +122,8 @@ public class AddStudentController {
             student.setPassportData(passport);
 
             studentDao.save(student);
+
+            session.close();
 
             displayTable.showStudentTable();
 

@@ -1,13 +1,15 @@
 package com.application.controllers.addControllers;
 
 
-import com.application.dao.StudentDao;
-import com.application.dao.SubjectDao;
+import com.application.daoTest.StudentDao;
+import com.application.daoTest.SubjectDao;
 import com.application.entities.*;
+import com.application.main.HibernateUtil;
 import com.application.tables.DisplayTable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.hibernate.Session;
 
 /**
  * Контроллер для окна добавления записей об успеваемости
@@ -32,7 +34,9 @@ public class AddPerformanceController {
     @FXML
     void initialize() {
         addButton.setOnAction(addEvent -> {
-            StudentDao studentDao = new StudentDao();
+            Session session = HibernateUtil.getSession();
+
+            StudentDao studentDao = new StudentDao(session);
 
             Student student = studentDao.findById(Integer.parseInt(id.getText()));
 
@@ -40,7 +44,7 @@ public class AddPerformanceController {
             performance.setMark(Integer.parseInt(mark.getText()));
             performance.setStudent(student);
 
-            SubjectDao subjectDao = new SubjectDao();
+            SubjectDao subjectDao = new SubjectDao(session);
 
             Subject subject = subjectDao.findById(Integer.parseInt(subjectId.getText()));
 
@@ -49,6 +53,8 @@ public class AddPerformanceController {
             student.addPerformance(performance);
 
             studentDao.update(student);
+
+            session.close();
 
             displayTable.showPerformanceTable();
 

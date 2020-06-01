@@ -1,12 +1,14 @@
 package com.application.tables;
 
-import com.application.dao.*;
+import com.application.daoTest.*;
 import com.application.entities.*;
+import com.application.main.HibernateUtil;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.hibernate.Session;
 
 import java.util.Date;
 import java.util.List;
@@ -43,7 +45,9 @@ public class DisplayTable {
 
         tableСondition = TableСondition.STUDENT;
 
-        StudentDao studentDao = new StudentDao();
+        Session session = HibernateUtil.getSession();
+
+        StudentDao studentDao = new StudentDao(session);
 
         List<Student> students = studentDao.findAll();
 
@@ -69,6 +73,8 @@ public class DisplayTable {
         TableColumn<Student, String> phoneNumber = new TableColumn("Номер телефона");
         phoneNumber.setCellValueFactory(new PropertyValueFactory("phoneNumber"));
 
+        session.close();
+
         offVisibleTables();
 
         tableStudent.getColumns().addAll(ID, name, address, birthDate, phoneNumber);
@@ -83,7 +89,9 @@ public class DisplayTable {
 
         tableСondition = TableСondition.PASSPORT;
 
-        StudentDao studentDao = new StudentDao();
+        Session session = HibernateUtil.getSession();
+
+        StudentDao studentDao = new StudentDao(session);
 
         List<Student> students = studentDao.findAll();
 
@@ -144,6 +152,8 @@ public class DisplayTable {
                 param.getValue().getPassportData().getTin()
         ));
 
+        session.close();
+
         offVisibleTables();
 
         tableStudent.getColumns().addAll(ID, name, birhtDate, issueDate, issuedBy, departmentCode, number, series, placeBirth, snilsNumber, tin);
@@ -156,9 +166,11 @@ public class DisplayTable {
     public void showSubjectTable() {
         tableSubjects.getColumns().clear();
 
-        tableСondition = TableСondition.PARENTS;
+        tableСondition = TableСondition.SUBJECT;
 
-        SubjectDao subjectDao = new SubjectDao();
+        Session session = HibernateUtil.getSession();
+
+        SubjectDao subjectDao = new SubjectDao(session);
 
         tableSubjects.setItems(FXCollections.observableList(subjectDao.findAll()));
 
@@ -173,6 +185,8 @@ public class DisplayTable {
 
         tableSubjects.getColumns().addAll(numberDiscipline, nameDiscipline, fullNameTeacher);
 
+        session.close();
+
         tableSubjects.setVisible(true);
     }
 
@@ -185,7 +199,9 @@ public class DisplayTable {
 
         tableСondition = TableСondition.PERFORMANCE;
 
-        PerformanceDao performanceDao = new PerformanceDao();
+        Session session = HibernateUtil.getSession();
+
+        PerformanceDao performanceDao = new PerformanceDao(session);
 
         tablePerformance.setItems(FXCollections.observableList(performanceDao.findAll()));
 
@@ -212,6 +228,8 @@ public class DisplayTable {
 
         tablePerformance.getColumns().addAll(numberPerformance, fullNameStudent, mark, discipline, teacher);
 
+        session.close();
+
         offVisibleTables();
 
         tablePerformance.setVisible(true);
@@ -226,7 +244,9 @@ public class DisplayTable {
 
         tableСondition = TableСondition.ATTENDANCE;
 
-        AttendanceDao attendanceDao = new AttendanceDao();
+        Session session = HibernateUtil.getSession();
+
+        AttendanceDao attendanceDao = new AttendanceDao(session);
 
         tableAttendance.setItems(FXCollections.observableList(attendanceDao.findAll()));
 
@@ -246,6 +266,8 @@ public class DisplayTable {
 
         tableAttendance.getColumns().addAll(numberAttendance, fullNameStudent, numberHours, date);
 
+        session.close();
+
         offVisibleTables();
 
         tableAttendance.setVisible(true);
@@ -260,7 +282,9 @@ public class DisplayTable {
 
         tableСondition = TableСondition.BIRTH_CERTIFICATE;
 
-        StudentDao studentDao = new StudentDao();
+        Session session = HibernateUtil.getSession();
+
+        StudentDao studentDao = new StudentDao(session);
 
         List<Student> students = studentDao.findAll();
 
@@ -296,6 +320,8 @@ public class DisplayTable {
                 param.getValue().getBirthCertificate().getDateIssue()
         ));
 
+        session.close();
+
         offVisibleTables();
 
         tableStudent.getColumns().addAll(ID, student, number, series, issuedBy, dateIssue);
@@ -310,7 +336,9 @@ public class DisplayTable {
 
         tableСondition = TableСondition.PARENTS;
 
-        ParentDao parentDao = new ParentDao();
+        Session session = HibernateUtil.getSession();
+
+        ParentDao parentDao = new ParentDao(session);
 
         tableParents.setItems(FXCollections.observableList(parentDao.findAll()));
 
@@ -348,6 +376,8 @@ public class DisplayTable {
         tableParents.getColumns().addAll(numberParent, fullNameStudent, fullName, familyStatus, numberChildren, phoneNumber, placeWork, address);
 
         offVisibleTables();
+
+        session.close();
 
         tableParents.setVisible(true);
 
